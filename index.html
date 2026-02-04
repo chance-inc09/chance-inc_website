@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チャンス株式会社 - 変化をチャンスに。</title>
+    <!-- Tailwind CSS CDNの読み込み -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- フォント設定: Inter (欧文) と日本語フォントの指定 -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap');
+        :root {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+        /* スムーズスクロール */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#0f172a', // ベースカラー: 濃いネイビー/スレート
+                        'accent-blue': '#3b82f6', // アクセントカラー: 明るいブルー
+                        'accent-light': '#93c5fd', // ライトブルー
+                        'muted-gray': '#64748b', // スレート-500
+                    },
+                    boxShadow: {
+                        'custom': '0 4px 10px rgba(0, 0, 0, 0.05), 0 20px 25px rgba(0, 0, 0, 0.1)',
+                    }
+                }
+            }
+        }
+
+        // JavaScript for mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Function to handle image placeholders (Placeholder.coを使用)
+        function getImagePlaceholder(width, height, text) {
+            // テキストの色を白(ffffff)、背景をダークグレー(4b5563)に設定
+            return `https://placehold.co/${width}x${height}/4b5563/ffffff/svg?text=${encodeURIComponent(text)}`;
+        }
+        
+        // Image loading handler (カスタムプレースホルダーロジック)
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('img[data-placeholder-text]').forEach(img => {
+                const width = img.getAttribute('data-placeholder-width') || 600;
+                const height = img.getAttribute('data-placeholder-height') || 400;
+                const text = img.getAttribute('data-placeholder-text');
+                img.src = getImagePlaceholder(width, height, text);
+            });
+        });
+
+        // スクロール時のヘッダー処理（ここでは特に動作はなし、デザイン的な準備のみ）
+    </script>
+</head>
+<body class="text-gray-800 antialiased bg-white">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20 max-w-7xl">
+            <!-- Logo (ご提供いただいた形状を元にSVG化) -->
+            <a href="#" class="flex items-center space-x-3">
+                <svg class="w-8 h-8 text-primary-dark" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <!-- ロゴの形状をシンプルに表現 -->
+                    <path d="M50 0L80 20V80L50 100L20 80V20L50 0ZM50 15L75 30V70L50 85L25 70V30L50 15ZM50 30L65 40V70L50 80V30Z" fill="currentColor"/>
+                    <path d="M50 30L65 40V70L50 80V30Z" fill="white"/>
+                    <path d="M50 30L65 40V70L50 80V30ZM50 15L75 30V70L50 85L25 70V30L50 15Z" fill="none" stroke="currentColor" stroke-width="5"/>
+                </svg>
+                <span class="text-xl font-extrabold tracking-wide text-primary-dark">CHANCE</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex space-x-8 text-base font-medium">
+                <a href="#vision" class="hover:text-accent-blue transition duration-150 py-2">ビジョン</a>
+                <a href="#services" class="hover:text-accent-blue transition duration-150 py-2">実績・サービス</a>
+                <a href="#team" class="hover:text-accent-blue transition duration-150 py-2">チーム</a>
+                <a href="#about" class="hover:text-accent-blue transition duration-150 py-2">会社概要</a>
+                <a href="#contact" class="px-5 py-2 rounded-lg bg-accent-blue text-white shadow-lg hover:bg-blue-600 transition duration-300 ml-4">お問い合わせ</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="lg:hidden p-2 rounded-md hover:bg-gray-100" onclick="toggleMenu()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu (Hidden by default) -->
+        <nav id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#vision" onclick="toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">ビジョン</a>
+                <a href="#services" onclick="toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">実績・サービス</a>
+                <a href="#team" onclick="toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">チーム</a>
+                <a href="#about" onclick="toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">会社概要</a>
+                <a href="#contact" onclick="toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-accent-blue mt-2">お問い合わせ</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ヒーローセクション (Hero Section) - 信頼感を出すダークテーマ -->
+        <section class="relative overflow-hidden pt-28 pb-36 md:pt-40 md:pb-56 bg-primary-dark text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <div class="max-w-4xl mx-auto text-center">
+                    <p class="text-lg font-medium text-accent-light mb-4 tracking-widest">CHANCE CORPORATION</p>
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-8 tracking-tighter leading-snug">
+                        <span class="text-accent-blue">変化</span>をチャンスに、<br class="hidden sm:inline">未来を創造する。
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto font-light">
+                        テクノロジーとビジネスの架け橋となり、企業の変革を支援します。複雑な課題に柔軟かつ本質的な価値で応え、持続可能な成長を共に実現します。
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                        <a href="#services" class="inline-block px-10 py-4 bg-accent-blue text-white font-semibold rounded-xl shadow-2xl hover:bg-blue-600 transition duration-300 transform hover:scale-105 text-lg">
+                            実績・サービスを見る
+                        </a>
+                        <a href="#contact" class="inline-block px-10 py-4 border border-gray-500 text-white font-semibold rounded-xl hover:bg-gray-700 transition duration-300 transform hover:scale-105 text-lg">
+                            ご相談はこちら
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- 背景画像（信頼感のあるビジュアル） - プレースホルダー -->
+            <img class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" 
+                 data-placeholder-width="1920" 
+                 data-placeholder-height="800" 
+                 data-placeholder-text="Professional Corporate Scene (Placeholder)"
+                 alt="企業の変革を象徴するビジュアル" />
+        </section>
+
+        <!-- ビジョンセクション (Vision Section) -->
+        <section id="vision" class="py-24 md:py-36 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Image -->
+                    <div class="order-1">
+                        <img class="w-full h-auto rounded-3xl shadow-custom object-cover aspect-[4/3]" 
+                             data-placeholder-width="700" 
+                             data-placeholder-height="525" 
+                             data-placeholder-text="Vision and Core Values (Placeholder)"
+                             alt="成長戦略会議の様子" />
+                    </div>
+                    <!-- Text Content -->
+                    <div class="order-2">
+                        <p class="text-base font-semibold uppercase text-accent-blue mb-3 tracking-wider">Our Vision</p>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-8 text-primary-dark leading-tight">
+                            「変化をチャンスに。」<br>持続可能な成長を共に実現する。
+                        </h2>
+                        <p class="text-xl text-muted-gray mb-6">
+                            技術の進化と市場の変動は、時に企業にとっての脅威となります。しかし、私たちはその変化こそを成長の最大のチャンスと捉えます。
+                        </p>
+                        <p class="text-xl text-muted-gray mb-8">
+                            テクノロジーを戦略的に活用し、お客様のビジネスプロセスに深い理解をもたらすことで、本質的な価値を生み出し続けます。
+                        </p>
+                        <a href="#services" class="inline-flex items-center text-accent-blue font-semibold text-lg hover:text-blue-700 transition duration-300">
+                            私たちの使命をさらに知る
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 実績・サービスセクション (Services Section) -->
+        <section id="services" class="py-24 md:py-36 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <div class="text-center mb-16">
+                    <p class="text-base font-semibold uppercase text-accent-blue mb-3 tracking-wider">Capabilities & Results</p>
+                    <h2 class="text-4xl md:text-5xl font-bold text-primary-dark">企業の変革を加速する支援領域</h2>
+                    <p class="mt-4 text-xl text-muted-gray max-w-4xl mx-auto">業務課題の整理から最先端技術の導入まで、ビジネス成功に向けた一貫した支援体制を提供します。</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-10">
+                    <!-- Pillar 1: 要件定義・ビジネスアナリスト業務 -->
+                    <div class="bg-white p-8 lg:p-10 rounded-2xl shadow-custom transition duration-300 hover:shadow-2xl border-t-8 border-accent-blue space-y-4">
+                        <div class="text-4xl text-accent-blue mb-4 font-extrabold">01</div>
+                        <h3 class="text-2xl font-bold text-primary-dark">要件定義・ビジネスアナリスト業務</h3>
+                        <p class="text-gray-600">
+                            業務課題の整理から要件定義、RFP作成支援まで一貫して対応。ビジネスの成功に直結する設計を保証します。本質的なニーズを捉え、最適な解決策を導き出します。
+                        </p>
+                    </div>
+
+                    <!-- Pillar 2: PMO支援 -->
+                    <div class="bg-white p-8 lg:p-10 rounded-2xl shadow-custom transition duration-300 hover:shadow-2xl border-t-8 border-primary-dark space-y-4">
+                        <div class="text-4xl text-primary-dark mb-4 font-extrabold">02</div>
+                        <h3 class="text-2xl font-bold text-primary-dark">PMO支援・プロジェクト管理</h3>
+                        <p class="text-gray-600">
+                            プロジェクトの立ち上げから進行管理、品質・リスク管理までをサポート。大規模プロジェクトを成功に導く実行力を提供し、計画通りの達成に貢献します。
+                        </p>
+                    </div>
+
+                    <!-- Pillar 3: 開発領域 -->
+                    <div class="bg-white p-8 lg:p-10 rounded-2xl shadow-custom transition duration-300 hover:shadow-2xl border-t-8 border-accent-blue space-y-4">
+                        <div class="text-4xl text-accent-blue mb-4 font-extrabold">03</div>
+                        <h3 class="text-2xl font-bold text-primary-dark">先端開発・システム導入</h3>
+                        <p class="text-gray-600">
+                            パッケージソフト導入（ERP/CRM等）、スクラッチ開発、AIを活用したローコード開発まで幅広く対応。最新技術で最適なシステムを構築します。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-20">
+                    <img class="inline-block w-full h-auto rounded-2xl shadow-2xl object-cover aspect-[16/5]" 
+                         data-placeholder-width="1200" 
+                         data-placeholder-height="375" 
+                         data-placeholder-text="Case Studies & Development Portfolio (Placeholder)"
+                         alt="技術と知見のポートフォリオを示すビジュアル" />
+                </div>
+            </div>
+        </section>
+
+        <!-- 役員・チーム紹介セクション (Team Section) -->
+        <section id="team" class="py-24 md:py-36">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <div class="text-center mb-16">
+                    <p class="text-base font-semibold uppercase text-accent-blue mb-3 tracking-wider">Leadership Team</p>
+                    <h2 class="text-4xl md:text-5xl font-bold text-primary-dark">信頼を築くプロフェッショナル</h2>
+                    <p class="mt-4 text-xl text-muted-gray">現場と経営、技術と体験。多角的な視点を持つリーダーシップチームがお客様を成功へと導きます。</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-12">
+                    <!-- Member 1: Akinori asano -->
+                    <div class="text-center p-6 bg-gray-50 rounded-xl shadow-md">
+                        <img class="w-36 h-36 rounded-full mx-auto object-cover border-4 border-white shadow-lg" 
+                             data-placeholder-width="144" 
+                             data-placeholder-height="144" 
+                             data-placeholder-text="A. Asano"
+                             alt="代表取締役社長 Akinori asanoの写真" />
+                        <h3 class="mt-6 text-2xl font-bold text-primary-dark">Asano</h3>
+                        <p class="text-accent-blue font-medium mb-3 text-lg">代表取締役社長</p>
+                        <p class="text-base text-gray-600">システム開発とプロジェクトマネジメントに精通。現場と経営の橋渡し役として、実行力と信頼を兼ね備えたリーダー。</p>
+                    </div>
+
+                    <!-- Member 2: Kazuki Shiraiwa -->
+                    <div class="text-center p-6 bg-gray-50 rounded-xl shadow-md">
+                        <img class="w-36 h-36 rounded-full mx-auto object-cover border-4 border-white shadow-lg" 
+                             data-placeholder-width="144" 
+                             data-placeholder-height="144" 
+                             data-placeholder-text="K. Shiraiwa"
+                             alt="Founder Kazuki Shiraiwaの写真" />
+                        <h3 class="mt-6 text-2xl font-bold text-primary-dark">Shiraiwa</h3>
+                        <p class="text-accent-blue font-medium mb-3 text-lg">Founder</p>
+                        <p class="text-base text-gray-600">ビジネスアナリシスと業務設計のスペシャリスト。ユーザー視点と論理的思考で、課題解決に導く実践者。</p>
+                    </div>
+
+                    <!-- Member 3: Kentaro Fukuoka -->
+                    <div class="text-center p-6 bg-gray-50 rounded-xl shadow-md">
+                        <img class="w-36 h-36 rounded-full mx-auto object-cover border-4 border-white shadow-lg" 
+                             data-placeholder-width="144" 
+                             data-placeholder-height="144" 
+                             data-placeholder-text="K. Fukuoka"
+                             alt="Founder Kentaro Fukuokaの写真" />
+                        <h3 class="mt-6 text-2xl font-bold text-primary-dark">Fukuoka</h3>
+                        <p class="text-accent-blue font-medium mb-3 text-lg">Founder</p>
+                        <p class="text-base text-gray-600">PDMとしての技術的バックグラウンドを活かし、プロジェクトマネジメントやUXデザインまで幅広く手がける。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 会社概要セクション (About Us Section) -->
+        <section id="about" class="py-24 md:py-36 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <p class="text-base font-semibold uppercase text-accent-blue mb-3 text-center tracking-wider">Company Profile</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-16 text-primary-dark text-center">会社概要</h2>
+
+                <div class="grid lg:grid-cols-2 gap-16 items-start bg-white p-8 md:p-12 rounded-2xl shadow-custom">
+                    
+                    <!-- 会社情報 -->
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-primary-dark border-b pb-3">基本情報</h3>
+                        <dl class="space-y-6 text-lg">
+                            <div class="flex pb-3 border-b border-gray-100">
+                                <dt class="w-1/3 font-medium text-muted-gray">会社名</dt>
+                                <dd class="w-2/3 font-semibold text-primary-dark">チャンス株式会社</dd>
+                            </div>
+                            <div class="flex pb-3 border-b border-gray-100">
+                                <dt class="w-1/3 font-medium text-muted-gray">所在地</dt>
+                                <dd class="w-2/3 text-primary-dark">東京都港区南青山３丁目１番３６号青山丸竹ビル６Ｆ</dd>
+                            </div>
+                            <div class="flex pb-3 border-b border-gray-100">
+                                <dt class="w-1/3 font-medium text-muted-gray">設立日</dt>
+                                <dd class="w-2/3 text-primary-dark">令和6年9月26日</dd>
+                            </div>
+                            <div class="flex pb-3">
+                                <dt class="w-1/3 font-medium text-muted-gray">代表取締役社長</dt>
+                                <dd class="w-2/3 text-primary-dark">Akinori asano</dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <!-- 事業内容 -->
+                    <div class="lg:pl-8 border-t lg:border-t-0 lg:border-l border-gray-100 pt-8 lg:pt-0">
+                        <h3 class="text-2xl font-bold mb-6 text-primary-dark border-b pb-3">事業内容</h3>
+                        <ul class="space-y-4 text-gray-600 text-lg">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-accent-blue text-xl leading-none font-bold">✓</span>
+                                <span>ソフトウェア・ハードウェアの企画、開発、販売、保守</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-accent-blue text-xl leading-none font-bold">✓</span>
+                                <span>企業戦略立案、業務改革、情報システム構築支援</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-accent-blue text-xl leading-none font-bold">✓</span>
+                                <span>インターネットを活用した各種サービス提供</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-accent-blue text-xl leading-none font-bold">✓</span>
+                                <span>上記に附帯関連する一切の業務</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- セキュリティ・プライバシーセクション (Privacy/Security) -->
+        <section id="privacy" class="py-24 md:py-36 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <div class="text-center mb-16">
+                    <p class="text-base font-semibold uppercase text-accent-blue mb-3 tracking-wider">Compliance</p>
+                    <h2 class="text-4xl md:text-5xl font-bold text-primary-dark">セキュリティとプライバシーへの取り組み</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 text-gray-700">
+                    <div class="p-8 border rounded-xl shadow-sm">
+                        <h3 class="text-2xl font-bold mb-4 text-primary-dark flex items-center">
+                             <svg class="w-6 h-6 mr-3 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                             情報の保護
+                        </h3>
+                        <p class="text-lg">
+                            チャンス株式会社は、お客様からお預かりした情報資産を、事故、災害、犯罪などの脅威から守り、お客様及び社会の信頼に応えるべく、組織的、技術的に適切なセキュリティ対策を講じ、機密性、完全性、可用性の維持に努めます。
+                        </p>
+                    </div>
+                    <div class="p-8 border rounded-xl shadow-sm">
+                        <h3 class="text-2xl font-bold mb-4 text-primary-dark flex items-center">
+                            <svg class="w-6 h-6 mr-3 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.103A.996.996 0 0020 7.897v7.206a.996.996 0 00-1.618.707L16 21H8L5.618 15.19A.996.996 0 004 14.897V7.897a.996.996 0 001.618-.707L8 3h8l2.382 4.19z"></path></svg>
+                            プライバシーポリシー
+                        </h3>
+                        <p class="text-lg">
+                            個人情報の重要性を認識し、個人情報保護に関する法令、規範、及び社内規定を遵守し、適切な収集、利用、提供、及び安全管理を行います。個人情報保護法に基づき、適切な取り扱いを徹底します。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <a href="#" class="text-accent-blue font-semibold hover:text-blue-700 transition duration-300 border-b border-accent-blue/50 pb-1">プライバシーポリシー詳細はこちら</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA/コンタクトセクション (Contact/Recruit CTA) - 汎用的な問い合わせ導線 -->
+        <section id="contact" class="py-24 md:py-36 bg-primary-dark/95 relative overflow-hidden">
+            <!-- Background Visual -->
+            <div class="absolute inset-0 opacity-10 pointer-events-none">
+                <img class="w-full h-full object-cover" 
+                     data-placeholder-width="1920" 
+                     data-placeholder-height="800" 
+                     data-placeholder-text="Global Collaboration Network (Placeholder)"
+                     alt="グローバルネットワークのイメージ" />
+            </div>
+
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10">
+                <div class="bg-white p-10 md:p-16 rounded-3xl shadow-custom text-center border border-gray-100">
+                    <p class="text-base font-semibold uppercase text-accent-blue mb-3 tracking-wider">Contact Us</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-primary-dark">次の一歩をご一緒に。</h2>
+                    <p class="text-xl text-gray-600 mb-10">
+                        プロジェクトのご相談、サービスに関するお問い合わせ、採用へのご興味など、お気軽にご連絡ください。
+                    </p>
+
+                    <div class="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0 md:space-x-8">
+                        <!-- 企業からの問い合わせ -->
+                        <a href="mailto:info@chance-inc.com" class="group relative inline-flex items-center justify-center rounded-xl bg-accent-blue px-8 py-4 text-white font-semibold shadow-xl hover:bg-blue-600 transition duration-300 transform hover:scale-[1.02]">
+                            <span class="relative z-10 text-lg">企業からのお問い合わせ</span>
+                        </a>
+
+                        <!-- 採用導線 -->
+                        <a href="mailto:info@chance-inc.com?subject=採用に関するお問い合わせ" class="group relative inline-flex items-center justify-center rounded-xl border-2 border-primary-dark px-8 py-4 text-primary-dark font-semibold shadow-md hover:bg-primary-dark hover:text-white transition duration-300 transform hover:scale-[1.02]">
+                            <span class="relative z-10 text-lg">採用情報（Join Us）</span>
+                        </a>
+                    </div>
+                    <p class="mt-8 text-sm text-gray-500">
+                        お問い合わせアドレス: <span class="font-mono text-primary-dark font-medium">info@chance-inc.com</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-dark pt-16 pb-8 border-t border-gray-700">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-10 pb-12 text-gray-400">
+                <!-- Company Info -->
+                <div class="col-span-2 md:col-span-2">
+                    <a href="#" class="flex items-center space-x-3 mb-4">
+                        <svg class="w-7 h-7 text-accent-blue" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 0L80 20V80L50 100L20 80V20L50 0ZM50 15L75 30V70L50 85L25 70V30L50 15Z" fill="currentColor"/>
+                        </svg>
+                        <span class="text-xl font-bold tracking-tight text-white">CHANCE株式会社</span>
+                    </a>
+                    <p class="text-sm mt-4">〒107-0062<br>東京都港区南青山３丁目１番３６号青山丸竹ビル６Ｆ</p>
+                    <p class="text-sm mt-2">Email: info@chance-inc.com</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-base font-semibold text-white uppercase tracking-wider mb-4">コンテンツ</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#vision" class="hover:text-white transition duration-150 text-sm">ビジョン</a></li>
+                        <li><a href="#services" class="hover:text-white transition duration-150 text-sm">実績・サービス</a></li>
+                        <li><a href="#team" class="hover:text-white transition duration-150 text-sm">チーム紹介</a></li>
+                        <li><a href="#about" class="hover:text-white transition duration-150 text-sm">会社概要</a></li>
+                    </ul>
+                </div>
+
+                <!-- Action Links -->
+                <div>
+                    <h4 class="text-base font-semibold text-white uppercase tracking-wider mb-4">アクション</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#contact" class="hover:text-white transition duration-150 text-sm">お問い合わせ窓口</a></li>
+                        <li><a href="mailto:info@chance-inc.com?subject=採用に関するお問い合わせ" class="hover:text-white transition duration-150 text-sm">採用情報</a></li>
+                        <li><a href="#privacy" class="hover:text-white transition duration-150 text-sm">セキュリティ/プライバシー</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social (Placeholder) -->
+                <div>
+                    <h4 class="text-base font-semibold text-white uppercase tracking-wider mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <!-- Twitter Icon Placeholder -->
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-150 p-1 rounded-full border border-gray-700 hover:border-white">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.8.36-1.68.6-2.6.7.92-.55 1.62-1.42 1.95-2.46-.86.5-1.8.84-2.8 1-.9-.94-2.18-1.52-3.6-1.52-3.4 0-6.16 2.76-6.16 6.16 0 .48.04.95.12 1.4-.5.02-1.9-.3-3.6-.9-.3.6-1.12 2.3-1.6 3.14-.14.24-.26.46-.38.7-.32.6-.54 1.25-.68 1.92 1.4.1 2.8.5 4 1.2-1 .3-1.9.5-3.1.5-2.1 0-3.9-.4-5.5-1.1 0 1.2.34 2.3 1 3.3.4.56 1.4 1.1 2.4 1.4-1.2.3-2.6.4-3.8.4-.2 0-.4 0-.6-.02.3 1.2 1 2.2 2.1 2.8C6.9 21.6 8.5 22 10 22c7.6 0 11.9-6.6 11.9-12.4 0-.2 0-.4 0-.6.8-.5 1.5-1.1 2.1-1.8z"/></svg>
+                        </a>
+                        <!-- Linkedin Icon Placeholder -->
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-150 p-1 rounded-full border border-gray-700 hover:border-white">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.25 0H1.75C.78 0 0 .78 0 1.75V22.25C0 23.22.78 24 1.75 24H22.25C23.22 24 24 23.22 24 22.25V1.75C24 .78 23.22 0 22.25 0zM7.5 20.75H3.25V9H7.5V20.75zM5.375 7.25C4.075 7.25 3 6.175 3 4.875S4.075 2.5 5.375 2.5 7.75 3.575 7.75 4.875 6.675 7.25 5.375 7.25zM20.75 20.75H16.5V14.5c0-1.4-.5-2.3-1.65-2.3-1.65 0-2.3 1.3-2.3 2.3V20.75H8.25V9h4v1.5c.55-.7 1.4-1.6 3.3-1.6C18.4 8.9 20.75 11.3 20.75 14.9V20.75z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center">
+                <p class="text-sm text-gray-500">
+                    &copy; <span id="current-year"></span> CHANCE Corporation. All Rights Reserved.
+                </p>
+                <p class="mt-1 text-xs text-gray-600">
+                    <a href="#privacy" class="hover:text-white transition duration-150">プライバシーポリシー</a> | <a href="#" class="hover:text-white transition duration-150">サイトマップ</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year for the copyright
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
