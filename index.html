@@ -49,6 +49,7 @@
         // Image loading handler (カスタムプレースホルダーロジック)
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('img[data-placeholder-text]').forEach(img => {
+                if (img.getAttribute('src')) return; // ← これ追加
                 const width = img.getAttribute('data-placeholder-width') || 600;
                 const height = img.getAttribute('data-placeholder-height') || 400;
                 const text = img.getAttribute('data-placeholder-text');
@@ -128,6 +129,7 @@
             <img class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" 
                  data-placeholder-width="1920" 
                  data-placeholder-height="800" 
+                 src="./Mainbackground.jpg"
                  data-placeholder-text="Professional Corporate Scene (Placeholder)"
                  alt="企業の変革を象徴するビジュアル">
         </section>
@@ -464,6 +466,7 @@
 </body>
 
 </html>
+
 
 
 
