@@ -49,7 +49,6 @@
         // Image loading handler (カスタムプレースホルダーロジック)
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('img[data-placeholder-text]').forEach(img => {
-                
                 const width = img.getAttribute('data-placeholder-width') || 600;
                 const height = img.getAttribute('data-placeholder-height') || 400;
                 const text = img.getAttribute('data-placeholder-text');
@@ -126,11 +125,11 @@
                 </div>
             </div>
             <!-- 背景画像（信頼感のあるビジュアル） - プレースホルダー -->
-            <img class="absolute inset-0 w-full h-full object-cover opacity-20　pointer-events-none" 
+            <img class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" 
                  data-placeholder-width="1920" 
                  data-placeholder-height="800" 
-                 src="./Images/Yakei.jpg" >>
-                 
+                 data-placeholder-text="Professional Corporate Scene (Placeholder)"
+                 alt="企業の変革を象徴するビジュアル" />
         </section>
 
         <!-- ビジョンセクション (Vision Section) -->
@@ -142,7 +141,8 @@
                         <img class="w-full h-auto rounded-3xl shadow-custom object-cover aspect-[4/3]" 
                              data-placeholder-width="700" 
                              data-placeholder-height="525" 
-                             src="./Images/HIYARINGU.png" >
+                             data-placeholder-text="Vision and Core Values (Placeholder)"
+                             alt="成長戦略会議の様子" />
                     </div>
                     <!-- Text Content -->
                     <div class="order-2">
@@ -462,24 +462,4 @@
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
